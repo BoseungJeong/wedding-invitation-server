@@ -6,3 +6,18 @@ type AttendanceCreate struct {
 	Meal  string `json:"meal"`
 	Count int    `json:"count"`
 }
+
+type AttendanceForGet struct {
+	Id        int    `json:"id"`
+	Side      string `json:"side"`
+	Name      string `json:"name"`
+	Meal      string `json:"meal"`
+	Count     int    `json:"count"`
+	Timestamp uint64 `json:"timestamp"`
+}
+
+type AttendanceGetResponse struct {
+	Attendances []AttendanceForGet `json:"attendances"`
+	Total       int                `json:"total"`
+	TotalCount  int                `json:"totalCount"`
+}
