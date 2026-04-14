@@ -11,14 +11,15 @@
 - 방명록 작성 및 조회 API
   - 관리자 비밀번호를 통한 방명록 강제 삭제 기능
 - 참석 의사 전달 API
-  - 참석자 조회 기능은 현재 미구현 상태
+  - 참석 의사 제출 시 서버 로그(stdout)에 기록 → Railway 대시보드에서 확인 가능
+  - 관리자 비밀번호를 통한 참석자 목록 조회 기능 (`GET /api/attendance?password=...`)
 
 ## 시작하기
 
 1. 저장소 복제:
 
    ```bash
-   git clone https://github.com/juhonamnam/wedding-invitation-server.git
+   git clone https://github.com/boseungjeong/wedding-invitation-server.git
    cd wedding-invitation-server
    ```
 
@@ -41,6 +42,19 @@
    - `ADMIN_PASSWORD`
      - 관리자 전용 비밀번호
      - 방명록 강제 삭제를 원하는 경우 해당 비밀번호로 삭제 가능
+     - 참석자 목록 조회(`GET /api/attendance`) 시에도 동일 비밀번호 필요
+
+## 관리자 기능
+
+- 참석자 목록 조회:
+  ```bash
+  curl "https://<railway-domain>/api/attendance?password=<ADMIN_PASSWORD>"
+  ```
+  또는 헤더 방식:
+  ```bash
+  curl -H "X-Admin-Password: <ADMIN_PASSWORD>" "https://<railway-domain>/api/attendance"
+  ```
+- 참석 의사 제출 로그는 Railway 프로젝트 대시보드의 **Deployments → Logs** 탭에서 확인 가능합니다. `[ATTENDANCE]` 접두사로 필터링할 수 있습니다.
 
 4. 서버 실행:
    ```bash
