@@ -43,6 +43,18 @@
      - 관리자 전용 비밀번호
      - 방명록 강제 삭제를 원하는 경우 해당 비밀번호로 삭제 가능
      - 참석자 목록 조회(`GET /api/attendance`) 시에도 동일 비밀번호 필요
+   - `DB_PATH`
+     - SQLite 데이터베이스 파일 경로 (기본값: `./sql.db`)
+     - Railway Volume 사용 시 `/data/sql.db` 등 Volume 마운트 경로로 설정
+
+## Railway Volume 설정 (데이터 영속화)
+
+Railway의 기본 파일시스템은 배포/재시작 시 초기화됩니다. 방명록과 참석자 데이터를 유지하려면 Volume을 연결해야 합니다.
+
+1. Railway 대시보드 → 서비스 선택 → **Volumes** 탭
+2. **Add Volume** 클릭 → Mount Path를 `/data` 로 설정
+3. **Variables** 탭에서 환경변수 추가: `DB_PATH=/data/sql.db`
+4. 서비스를 재배포하면 이후 모든 데이터가 Volume에 저장되어 배포/재시작에도 유지됩니다.
 
 ## 관리자 기능
 
